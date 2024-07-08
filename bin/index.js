@@ -2,9 +2,14 @@
 // 1 配置可执行的命令 commander
 import { Command } from 'commander'
 import chalk from 'chalk'
-import config from '../package.json' assert { type: 'json' }
+import path, { dirname } from 'path'
+import fs from 'fs-extra'
+import { fileURLToPath } from 'url'
 
 const program = new Command()
+
+const config = fs.readJSONSync(path.resolve(dirname(fileURLToPath(import.meta.url)), '../package.json'))
+
 
 program
 	.command('create <app-name>') // 创建命令
